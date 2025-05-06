@@ -19,7 +19,7 @@ s! {
         pub st_uid: crate::uid_t,
         pub st_gid: crate::gid_t,
         pub st_rdev: crate::dev_t,
-        pub __pad1: crate::dev_t,
+        pub __pad: crate::dev_t,
         pub st_size: off_t,
         pub st_blksize: crate::blksize_t,
         pub __pad2: c_int,
@@ -61,10 +61,8 @@ s! {
         pub gid: crate::gid_t,
         pub cuid: crate::uid_t,
         pub cgid: crate::gid_t,
-        pub mode: c_ushort,
-        __pad1: c_ushort,
-        pub __seq: c_ushort,
-        __pad2: c_ushort,
+        pub mode: c_uint,
+        pub __seq: c_int,
         __unused1: c_ulong,
         __unused2: c_ulong,
     }
@@ -88,7 +86,7 @@ s! {
 s_no_extra_traits! {
     #[allow(missing_debug_implementations)]
     pub struct ucontext_t {
-        pub __uc_flags: c_ulong,
+        pub uc_flags: c_ulong,
         pub uc_link: *mut ucontext_t,
         pub uc_stack: crate::stack_t,
         pub uc_sigmask: crate::sigset_t,
@@ -125,7 +123,7 @@ s_no_extra_traits! {
     pub struct __riscv_mc_q_ext_state {
         pub __f: [c_ulonglong; 64],
         pub __fcsr: c_uint,
-        pub __glibc_reserved: [c_uint; 3],
+        pub __reserved: [c_uint; 3],
     }
 }
 
@@ -674,4 +672,3 @@ pub const REG_S0: usize = 8;
 pub const REG_S1: usize = 9;
 pub const REG_A0: usize = 10;
 pub const REG_S2: usize = 18;
-pub const REG_NARGS: usize = 8;
